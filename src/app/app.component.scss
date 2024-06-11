@@ -1,0 +1,7 @@
+@import "../scss/mixins";
+@import "../scss/varibales";
+.container {
+  @include flex(column, center, center);
+  min-height: 100vh;
+  // background-color: $primaryClr;
+}

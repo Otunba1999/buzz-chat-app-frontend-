@@ -1,0 +1,45 @@
+<div class="chat">
+  <div class="profile-img">
+    <img
+      *ngIf="chat.user.imageUrl"
+      [src]="baseUrl + chat.user.id + '/' + chat.user.imageUrl"
+      alt=""
+      (load)="onImageLoad()"
+      #image
+    />
+    <i
+      *ngIf="!chat.user.imageUrl"
+      class="fa fa-user-circle-o"
+      aria-hidden="true"
+    ></i>
+  </div>
+  <div class="chat-info">
+    <p class="roboto-bold">{{ chat.user.username }}</p>
+    <p *ngIf="chat.lastMessage">
+      <i
+        *ngIf="chat.lastMessage.senderId !== chat.user.id"
+        class="fa fa-check-circle"
+        [style]="{
+          color:
+            true
+              ? '#8e3e63'
+              : 'gray'
+        }"
+        aria-hidden="true"
+      ></i>
+      {{  lastMessage.content }}
+    </p>
+  </div>
+  <div *ngIf="chat.lastMessage" class="chat-time">
+    <p>
+      {{ getTime(chat) }}
+    </p>
+    <span
+      *ngIf="
+        chat.unReadMessages && chat.lastMessage.senderId === chat.user.id
+      "
+      >{{ chat.unReadMessages }}</span
+    >
+  </div>
+</div>
+<!-- *ngIf="unRead && sender == chat.messages[chat.messages.length - 1].sender.username" -->

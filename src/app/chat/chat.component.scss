@@ -1,0 +1,92 @@
+@import "../../scss/varibales";
+@import "../../scss/mixins";
+
+.chat {
+  @include flex(row, space-between, center);
+  gap: 5px;
+  transition: background-color 0.15s ease-in;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px 10px;
+  // border: 1px solid green;
+  width: inherit;
+  &:hover{
+    background-color: rgb(119, 119, 119);
+  }
+  .profile-img {
+    object-fit: fill;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background-image: $imgBg;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    @include flex(row, center, center);
+    img {
+      width: 65px;
+      opacity: 0;
+      transition: opacity 200ms ease-in;
+      object-fit: cover;
+      object-position: center;
+    }
+    i{
+      font-size: 50px;
+    }
+  }
+
+  .chat-info {
+    flex-shrink: 0;
+    flex-grow: 1;
+    // max-width: 260px;
+    //  border: 1px solid yellow;
+    p:first-child {
+      font-size: 17px;
+    }
+    p:last-child {
+      font-size: 15px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      flex-shrink: 1;
+      // color: black;
+    }
+  }
+  .chat-time {
+    flex-shrink: 0;
+    font-size: 13px;
+    color: $primaryClr;
+    //  border: 1px solid wheat;
+    span {
+      margin-top: 3px;
+      font-size: 11px;
+      @include flex(row, center, center);
+      background-color: $primaryClr;
+      color: $secondaryClr;
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      padding: 10px;
+      right: 0;
+      margin-left: 10px;
+
+      
+    }
+  }
+ 
+}
+@media (prefers-color-scheme: dark){
+    .chat:hover{
+      background-color: rgb(51, 51, 51);
+    }
+  }
+
+  @media (prefers-color-scheme: light){
+    .chat{
+      &:hover{
+      background-color: rgb(204, 204, 204);
+    }
+    }
+  }

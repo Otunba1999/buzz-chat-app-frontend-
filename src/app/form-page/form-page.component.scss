@@ -1,0 +1,135 @@
+@import "../../scss/varibales";
+@import "../../scss/mixins";
+
+$inputWidth: 80%;
+$formPageWidth: 700px;
+$heigth: 10px;
+
+.form-page {
+  $bgImage: url("../../assets/happy-pic.jpg");
+  $bgOpacity: 0.7;
+
+  background-image: $bgImage;
+  background-position: center;
+  background-size: cover;
+  max-width: 1000px;
+  width: $formPageWidth;
+  height: calc(60 / 100 * $formPageWidth);
+  position: relative;
+  isolation: isolate;
+  @include flex(column, flex-start, center);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: $tetiaryClr;
+    opacity: $bgOpacity;
+    z-index: -1;
+  }
+  .logo {
+    text-align: center;
+    color: $primaryClr;
+    // position: relative;
+    h2 {
+      font-size: 50px;
+    }
+    p {
+      font-size: 20px;
+      -webkit-text-stroke: calc(2.14/100 * 20) $primaryClr;
+        text-align: left;
+      position: relative;
+      &::before{
+        content: attr(data-text);
+       
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        text-align: left;
+        // text-overflow: ellipsis;
+        color: $primaryClrLight;
+        opacity: 1;
+        -webkit-text-stroke: 0px $primaryClrLight;
+        // border: 2px solid $secondaryClr;
+        overflow: hidden;
+       
+        // animation: colorChange 10s linear infinite ;
+      }
+    }
+  }
+
+  .form {
+    @include flex(column, center, center);
+    gap: 10px;
+    margin-top: 20px;
+    // border: 1px solid;
+    width: 70%;
+    padding: 10px;
+
+    input,
+    button {
+      border: none;
+      padding: $heigth;
+      width: 100%;
+      border-radius: 5px;
+      &:focus {
+        outline: none;
+      }
+      &::placeholder {
+        font-size: 17px;
+        color: $primaryClr;
+      }
+    }
+
+    .password {
+      @include flex(row, center, center);
+      width: $inputWidth;
+      background-color: white;
+      position: relative;
+      // border: 1px solid;
+
+      span {
+        background-color: white;
+        padding: $heigth - 1.5;
+        // border: 1px solid;
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        i {
+          color: $primaryClr;
+        }
+      }
+    }
+
+    button {
+      width: calc($inputWidth / 2);
+      background-color: $secondaryClr;
+      color: $primaryClr;
+      font-size: 17px;
+      cursor: pointer;
+    }
+  }
+  p:last-child{
+    font-size: 20px;
+    color: $primaryClr;
+    a{
+      cursor: pointer;
+      color: $primaryClrLight;
+      text-decoration: none;
+    }
+  }
+}
+@keyframes colorChange {
+  0%, 10%, 100% {
+    width: 0%;
+  }
+  70%, 90% {
+    width: 100%;
+  }
+}
+.change-color {
+  animation: colorChange 1s ease-in-out infinite alternate;
+  animation-delay: 2s;
+  font-size: 20px;
+}

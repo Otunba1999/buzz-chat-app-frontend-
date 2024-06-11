@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="options">
+    <div class="top-options">
+      <div class="option" *ngFor="let option of options" (click)="activeOption($event)">
+        <i [class]="option.icon" aria-hidden="true"></i>
+        <p>{{ option.value }}</p>
+      </div>
+    </div>
+    <div class="bottom-options">
+      <div class="option" (click)="activeOption($event)" id="active">
+        <i class="fa fa-user-o" aria-hidden="true"></i>
+        <p>Profile</p>
+      </div>
+    </div>
+  </div>
+  <div class="seperator" role="separator"></div>
+  <div class="user-profile">
+    <div
+      class="profile-img"
+      (mouseenter)="onMouseEnter()"
+      (mouseleave)="onMouseOut()"
+    >
+      <img
+        *ngIf="appUser?.imageUrl"
+        #image
+        [src]="baseUrl + appUser.id + '/' + appUser.imageUrl"
+        [alt]="appUser?.imageUrl"
+        loading="lazy"
+        (load)="onLoaded()"
+      />
+      <i
+        *ngIf="!appUser?.imageUrl"
+        class="fa fa-user-circle-o"
+        aria-hidden="true"
+      ></i>
+      <div *ngIf="showSelect" class="select" (click)="selectFile()">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        <input
+          #file
+          type="file"
+          style="display: none"
+          (change)="getSelectedFile($event)"
+        />
+      </div>
+      <app-spinner *ngIf="showSpinner && appUser.imageUrl"></app-spinner>
+    </div>
+    <div class="username">
+      <input
+        #input
+        class="roboto-bold"
+        tabindex="-6"
+        type="text"
+        [maxlength]="maxLimit"
+        (focus)="preventFocus($event)"
+        (mousedown)="preventFocus($event)"
+        (blur)="onBlur()"
+        [readOnly]="isReadOnly"
+        [(ngModel)]="accountUserUsername"
+        (ngModelChange)="getLimit()"
+      />
+      <span *ngIf="isReadOnly" (click)="changeReadOnly($event)">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      </span>
+    </div>
+    <span *ngIf="!isReadOnly" class="name-limit">{{ getLimit() }}</span>
+    <div class="seperator" role="separator"></div>
+    <div class="logout">
+      <button
+        class="roboto-bold"
+        [@keypressed]="isKeyPressed ? 'pressed' : 'released'"
+        (click)="logout()"
+        (mousedown)="toggleKey()"
+        ((mouseleave))="toggleKey()"
+      >
+        Log out
+      </button>
+      <p class="roboto-thin">
+        Chat history on this computer will be cleared when you log out
+      </p>
+    </div>
+  </div>
+</div>

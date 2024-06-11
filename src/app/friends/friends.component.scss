@@ -1,0 +1,489 @@
+@import "../../scss/mixins";
+@import "../../scss/varibales";
+
+$containerWidth: 100vw;
+$chatSecWidth: calc(30 / 100 * $containerWidth);
+$chatDescWidth: $containerWidth - $chatSecWidth;
+$iconFontSize: 18px;
+$iconHover: gray;
+$transition: background-color 0.15s ease-in;
+$scrollbarDark: rgb(192, 190, 190);
+$scrollTrackDark: rgb(85, 85, 85);
+$imgBg: url("../../assets/buzz-logo-sm.png");
+
+.container {
+  max-height: 100vh;
+  width: $containerWidth;
+  @include flex(row, flex-start, start);
+  overflow: hidden;
+  position: relative;
+}
+profile-menu{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  
+}
+
+nav {
+  // position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 4vw;
+  height: 100vh;
+  padding: 10px 0;
+  flex-shrink: 0;
+  @include flex(column, space-between, center);
+
+  div {
+    // border: 1px solid blue;
+    @include flex(column, space-between, center);
+    gap: 15px;
+    i {
+      font-size: $iconFontSize;
+      padding: 5px;
+      transition: $transition;
+      border-radius: 5px;
+      &:hover {
+        background-color: $iconHover;
+      }
+    }
+    .profile-img {
+      width: 30px;
+      height: 33px;
+      border-radius: 15px;
+      @include flex(row, center, center);
+      overflow: hidden;
+      background-image: $imgBg;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      cursor: pointer;
+      img {
+        width: 50px;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0;
+        transition: opacity 200ms ease-in-out;
+      }
+    }
+  }
+  .top {
+    span {
+      position: relative;
+      &:hover {
+        background-color: $iconHover;
+      }
+      span {
+        height: 20px;
+        width: 20px;
+        border-radius: 10px;
+        background-color: $primaryClr;
+        color: $secondaryClr;
+        font-size: 12px;
+        @include flex(row, center, center);
+        position: absolute;
+        top: -3px;
+        right: -3px;
+      }
+    }
+  }
+}
+
+.chat-sec {
+  width: $chatSecWidth;
+  height: 100vh;
+  min-width: 20vw;
+  padding: 0;
+  border-right: 1px solid;
+  // margin-left: 4vw;
+  overflow-y: auto;
+  flex-shrink: 1;
+  // scrollbar-width: thin;
+  position: relative;
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  .handle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 10px;
+    cursor: ew-resize;
+    border: 2px solid blue;
+    background-color: white;
+    z-index: 5;
+  }
+
+  .header {
+    // border: 1px solid red;
+    position: sticky;
+    // left: 4vw;
+    top: 0px;
+    width: 100%;
+    padding: 10px;
+    z-index: 10;
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+    }
+
+    header {
+      @include flex(row, space-between, center);
+      .icon-con {
+        @include flex(row, space-between, center);
+        gap: 30px;
+
+        i {
+          font-size: $iconFontSize;
+          padding: 5px;
+          border-radius: 5px;
+          transition: $transition;
+          &:hover {
+            background-color: $iconHover;
+          }
+        }
+      }
+    }
+
+    .search-box {
+      width: 90%;
+      margin-left: 20px;
+      border: 1px solid blue;
+      position: relative;
+      border-radius: 5px;
+      @include flex(row, center, center);
+      margin-top: 10px;
+      border-bottom: 3px solid $primaryClr;
+      border-top: 1px solid gray;
+      border-left: 1px solid gray;
+      border-right: 1px solid gray;
+      input {
+        width: 100%;
+        padding: 7px;
+        border: none;
+        border-radius: 5px;
+        &:focus {
+          outline: none;
+        }
+      }
+      i {
+        font-size: 20px;
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        font-weight: lighter;
+      }
+    }
+
+    // background-color: inherit;
+  }
+}
+
+.chat-list {
+  position: absolute;
+  top: 15vh;
+  @include flex(column, center, flex-start);
+  gap: 10px;
+  // margin-top: 90px;
+  // border-right: 1px solid orange;
+  width: 100%;
+}
+
+.chat-detail {
+  // width: $chatDescWidth;
+  height: 100vh;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  @include flex(column, start, space-between);
+  .head {
+    @include flex(row, space-between, center);
+    // background-color: black;
+    padding: 8px;
+    height: 9vh;
+
+    .image-sec {
+      @include flex(row, space-between, center);
+      gap: 10px;
+      .profile-image {
+        width: 35px;
+        height: 35px;
+        border-radius: 17.5px;
+        overflow: hidden;
+        background-image: $imgBg;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        @include flex(row, center, center);
+        img {
+          width: 60px;
+          height: auto;
+          object-fit: cover;
+          object-position: center;
+          opacity: 0;
+          transition: opacity 0.2s ease-in;
+        }
+        i {
+          font-size: 50px;
+        }
+      }
+      span {
+        font-size: $iconFontSize;
+      }
+    }
+
+    .icon-sec {
+      @include flex(row, space-between, center);
+      gap: 5px;
+
+      div {
+        @include flex(row, space-between, center);
+        border: 1px solid gray;
+        gap: 10px;
+        .divider {
+          width: 1px;
+          height: 25px;
+          background-color: gray;
+        }
+      }
+      i {
+        padding: 5px;
+        font-size: $iconFontSize;
+        border-radius: 5px;
+        transition: $transition;
+        &:hover {
+          background-color: $iconHover;
+        }
+      }
+    }
+  }
+  .message-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 30px;
+    background-image: url("../../assets/wallpaper/bg-wallpaper-1.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    flex-grow: 1;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $scrollbarDark;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track-piece {
+      background-color: black;
+      border-radius: 10px;
+    }
+    .message {
+      // border: 1px solid green;
+      padding: 10px;
+      margin-bottom: 10px;
+      max-width: 500px;
+      border-radius: 5px;
+      position: relative;
+      @include flex(row, space-between, center);
+      span {
+        align-self: end;
+        position: absolute;
+        right: 2px;
+        bottom: -2px;
+        font-size: 12px;
+      }
+    }
+  }
+  .message-input {
+    @include flex(row, space-between, center);
+    max-height: 30vh;
+    height: 9vh;
+    // padding: 10px;
+    gap: 10px;
+    // overflow: hidden;
+    padding: 0 15px;
+    div:first-child {
+      @include flex(row, space-between, center);
+      gap: 20px;
+    }
+    .text-area {
+      flex-grow: 1;
+      // border: 1px solid red;
+      max-width: 800px;
+      textarea {
+        width: 100%;
+        resize: none;
+        padding: 10px;
+        background-color: inherit;
+        border: none;
+        color: inherit;
+        font-size: 15px;
+        scrollbar-width: none;
+        overflow-y: hidden;
+        margin: 0;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    button{
+      border: none;
+      padding: 5px;
+      width: 50px;
+      border-radius: 4px;
+      box-shadow: 3px 3px 5px rgb(26, 25, 25);
+    }
+  }
+  i {
+    font-size: $iconFontSize;
+    padding: 5px;
+    border-radius: 5px;
+    transition: $transition;
+    &:hover {
+      background-color: $iconHover;
+    }
+  }
+}
+i {
+  cursor: pointer;
+}
+.user-container{
+  border: 1px solid green;
+  .user{
+    cursor: pointer;
+  }
+}
+.active{
+  background-color: $activeClr;
+}
+
+.center-content {
+  @include flex(row, center, center);
+  height: 100%;
+}
+.align-left {
+  align-self: flex-start;
+  background-color: gray;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right-color: gray;
+    border-top-color: gray;
+    border-radius: 1px;
+  }
+}
+.align-right {
+  align-self: flex-end;
+  background-color: $primaryClr;
+  color: $secondaryClr;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: -10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-left-color: $primaryClr;
+    border-top-color: $primaryClr;
+    border-radius: 1px;
+  }
+}
+app-chat {
+  width: 100%;
+}
+@media (prefers-color-scheme: dark) {
+  .header {
+    &::after {
+      background-color: $bgClrBlack;
+    }
+  }
+  nav {
+    background-color: $bgClrBlack2;
+  }
+  .chat-sec {
+    &::-webkit-scrollbar-thumb {
+      background-color: $scrollbarDark;
+      border-radius: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: $scrollTrackDark;
+    }
+  }
+  .message-list {
+    &::-webkit-scrollbar-thumb {
+      background-color: $scrollbarDark;
+      border-radius: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: $scrollTrackDark;
+    }
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .header {
+    &::after {
+      background-color: $bgClrLight;
+    }
+  }
+  nav {
+    background-color: $bgClrLight2;
+  }
+  .align-left {
+    background-color: $bgClrLight;
+    &::after {
+      border-right-color: $bgClrLight;
+      border-top-color: $bgClrLight;
+    }
+  }
+  .chat-sec,
+  .message-list {
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(36, 35, 35);
+      border-radius: 5px;
+      &:hover {
+        background-color: rgb(255, 255, 255);
+      }
+    }
+    &::-webkit-scrollbar-track {
+      background-color: gray;
+      &:hover {
+        background-color: rgb(48, 48, 51);
+      }
+    }
+  }
+  .message-list {
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(36, 35, 35);
+      border-radius: 5px;
+      &:hover {
+        background-color: rgb(255, 255, 255);
+      }
+    }
+    &::-webkit-scrollbar-track {
+      background-color: gray;
+      &:hover {
+        background-color: rgb(48, 48, 51);
+      }
+    }
+  }
+}

@@ -1,0 +1,186 @@
+@import "../../scss/mixins";
+@import "../../scss/varibales";
+
+@mixin seperator($width, $height) {
+  background-color: gray;
+  width: $width;
+  height: $height;
+}
+
+.container {
+  @include flex(row, flex-start, center);
+  width: 500px;
+  height: 400px;
+  //   padding: 10px;
+
+  .seperator {
+    @include seperator(1px, 100%);
+  }
+
+  .options {
+    // border: 1px solid red;
+    padding: 5px 5px;
+    width: 150px;
+    height: 100%;
+    @include flex(column, flex-start, start);
+    gap: 10px;
+
+    .top-options,
+    .bottom-options {
+      @include flex(column, flex-start, start);
+      gap: 10px;
+      width: 100%;
+    }
+    .bottom-options {
+      margin-top: auto;
+      width: 100%;
+    }
+    .option {
+      @include flex(row, flex-start, center);
+      gap: 10px;
+      padding: 3px 5px;
+      width: 100%;
+      border-radius: 4px;
+      transition: background-color 0.15s ease-in-out;
+      cursor: pointer;
+      &:hover {
+        background-color: $activeClr;
+      }
+    }
+  }
+
+  .user-profile {
+    // border: 1px solid blue;
+    flex-grow: 1;
+    height: 100%;
+    padding: 10px;
+    @include flex(column, flex-start, flex-start);
+
+    .profile-img {
+      position: relative;
+      border: 1px solid white;
+      width: 90px;
+      height: 90px;
+      border-radius: 45px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      @include flex(row, center, center);
+      cursor: pointer;
+      background-image: $imgBg;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+
+      img {
+        width: 100px;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0;
+        transition: opacity 200ms ease-in-out;
+      }
+      .select {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(10, 10, 10, 0.4);
+        @include flex(row, center, center);
+      }
+      app-spinner{
+        position: absolute;
+        top: 30%;
+        left: 30%;
+        z-index: 20;
+      }
+      i{
+        font-size: 90px
+      }
+    }
+
+    .username {
+      @include flex(row, space-between, center);
+      // align-self: flex-start;
+      margin-bottom: 2px;
+      width: 100%;
+      position: relative;
+      // border: 1px solid orange;
+      input {
+        flex-grow: 1;
+        font-size: 20px;
+        background-color: inherit;
+        border: none;
+        color: inherit;
+        border-radius: 4px;
+        &:focus {
+          outline: none;
+          border-bottom: 2px solid $primaryClr;
+          border-top: 1px solid $activeClr;
+          border-left: 1px solid $activeClr;
+          border-right: 1px solid $activeClr;
+        }
+      }
+      i {
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 4px;
+        transition: background-color 0.15s ease-in;
+        &:hover {
+          background-color: $activeClr;
+        }
+      }
+    }
+    .name-limit {
+      border-radius: 4px;
+      font-size: 12px;
+      padding: 2px;
+      width: 60px;
+      text-align: center;
+      align-self: flex-end;
+      margin-bottom: 2px;
+      background-color: $primaryClr;
+      color: $secondaryClr;
+    }
+    .seperator {
+      @include seperator(100%, 1px);
+    }
+    .logout {
+      button {
+        padding: 5px;
+        width: 100px;
+        border-radius: 5px;
+        border: none;
+        margin-top: 10px;
+        color: rgb(161, 32, 32);
+        background-color: rgb(44, 44, 44);
+        box-shadow: 2px 2px 8px rgb(65, 65, 65);
+        cursor: pointer;
+        transition: transform .15s ease;
+        // &:hover{
+        //   transform: scale(.98);
+        // }
+        
+      }
+      p {
+        margin-top: 5px;
+        font-size: 13px;
+      }
+    }
+  }
+
+  .active {
+    border-left: 5px solid $primaryClr;
+    background-color: $activeClr;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: $bgClrBlack;
+    color: $bgClrLight;
+    box-shadow: 3px -3px 5px rgb(59, 59, 59);
+  }
+}
+@media (prefers-color-scheme: light) {
+  .container {
+    background-color: $bgClrLight;
+    color: $bgClrBlack;
+  }
+}

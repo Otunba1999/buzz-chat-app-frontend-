@@ -1,0 +1,94 @@
+<div class="form-page">
+  <div class="logo" id="logo">
+    <h2 class="roboto-bold">
+      Buzz<i class="fa-regular fa-comment-dots"></i>
+    </h2>
+    <p
+      class="roboto-bold"
+      id="desc"
+      data-text="stay connected in a loop with colleagues..."
+    >
+      stay connected in a loop with colleagues...
+    </p>
+  </div>
+  <form action="" class="form" (ngSubmit)="onSubmit()">
+    <div class="password">
+      <input
+        class="roboto-bold"
+        type="text"
+        name="username"
+        placeholder="username"
+        required
+        [(ngModel)]="username"
+      />
+    </div>
+    <div class="password">
+      <input
+        class="roboto-bold"
+        [type]="isShowPassword ? 'text' : 'password'"
+        name="password"
+        placeholder="password"
+        required
+        [(ngModel)]="password"
+      />
+      <span (click)="showPassword()"
+        ><i
+          [class]="isShowPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"
+          aria-hidden="true"
+        ></i
+      ></span>
+    </div>
+    <div class="password roboto-bold" *ngIf="!isLogonMode">
+      <input
+        class="roboto-bold"
+        [type]="isShowPassword ? 'text' : 'password'"
+        name="confirm-password"
+        placeholder="confirm password"
+        required
+        [(ngModel)]="confirmPassword"
+      />
+      <span (click)="showPassword()"
+        ><i
+          [class]="isShowPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"
+          aria-hidden="true"
+        ></i
+      ></span>
+    </div>
+
+    <button type="submit" class="roboto-bold">
+      {{ isLogonMode ? "Login" : "Sign up" }}
+    </button>
+  </form>
+  <p>
+    {{ isLogonMode ? "Don't have an account ? " : "Already have an account ? "
+    }}<a (click)="changeToLogin()">{{ isLogonMode ? "Sign up" : "Login" }}</a>
+  </p>
+</div>
+
+<!-- <p _ngcontent-ng-c3821784393="" id="desc" class="roboto-bold">
+  <span class="change-color">S</span><span class="change-color">t</span
+  ><span class="change-color">a</span><span class="change-color">y</span
+  ><span class="change-color"> </span><span class="change-color">C</span
+  ><span class="change-color">o</span><span class="change-color">n</span
+  ><span class="change-color">n</span><span class="change-color">e</span
+  ><span class="change-color">c</span><span class="change-color">t</span
+  ><span class="change-color">e</span><span class="change-color">d</span
+  ><span class="change-color"> </span><span class="change-color">i</span
+  ><span class="change-color">n</span><span class="change-color"> </span
+  ><span class="change-color">a</span><span class="change-color"> </span
+  ><span class="change-color">l</span><span class="change-color">o</span
+  ><span class="change-color">o</span><span class="change-color">p</span
+  ><span class="change-color"> </span><span class="change-color">a</span
+  ><span class="change-color">t</span><span class="change-color"> </span
+  ><span class="change-color">a</span><span class="change-color">n</span
+  ><span class="change-color">y</span><span class="change-color">t</span
+  ><span class="change-color">i</span><span class="change-color">m</span
+  ><span class="change-color">e</span><span class="change-color"> </span
+  ><span class="change-color">w</span><span class="change-color">i</span
+  ><span class="change-color">t</span><span class="change-color">h</span
+  ><span class="change-color"> </span><span class="change-color">c</span
+  ><span class="change-color">o</span><span class="change-color">l</span
+  ><span class="change-color">l</span><span class="change-color">e</span
+  ><span class="change-color">g</span><span class="change-color">u</span
+  ><span class="change-color">e</span><span class="change-color">s</span>
+</p> -->
